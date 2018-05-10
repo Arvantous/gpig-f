@@ -26,7 +26,7 @@ class World(object):
 
     def run_for_n(self,steps):
         """Run simulation for n steps"""
-        for step in xrange(steps):
+        for step in range(steps):
             self.step_all()
             self.steps += 1
 

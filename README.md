@@ -1,11 +1,28 @@
 # GPIG - Simulation
 This is a repository containing containing the source code for the demonstration simulation and engine.
 
-Technologies:
+
+Requirements:
 
 [Python 3](https://www.python.org/downloads/)
 
 [Flask](http://flask.pocoo.org/)
+
+## Running the simulation
+
+
+Run:
+
+```
+$ python ./engine/GridWebInterface.py
+```
+
+
+Go to:
+
+```
+http://127.0.0.1:5000/
+```
 
 # Create a basic simulation, Hello World
 Import the World and Agent object. The World class is a container for the simulation. It controls the update order for the objects and provides a parent for the object to communicate through. it provides methods for updating each agent.

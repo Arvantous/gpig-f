@@ -13,7 +13,7 @@ from SimEng import World, Agent
 We create a new agent using the base Agent class a blueprint, purpose of this agent will be to say "Hello World" and tell us how many steps have passed since the simulation was started.
 We can define this agent as so:
 ```python
-class HelloWorld(Agent):
+class Hello_world(Agent):
     """Test Agent"""
     def __init__(self, world):
         super().__init__(world)
@@ -27,7 +27,7 @@ The init method adds the HelloWorld Agent to the simulation world and sets the n
 
 ```python
 my_world = World()
-helloAgent = Agent(my_world)
+hello_agent = Hello_world(my_world)
 ```
 We pass the agent the world object so it can make reference to other entities and make itself a member of this simulation world. We can now run the simulation for 10 steps and see the corresponding output.
 ```python

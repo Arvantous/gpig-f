@@ -20,7 +20,7 @@ def create_world():
             grid.step_all()
             time.sleep(1)
     global grid
-    grid = GridCreator.make_grid("../config/config.json", "../config/templates.json")
+    grid = GridCreator.make_grid("./config/config.json", "./config/templates.json")
     thread = threading.Thread(target=run_simulation)
     thread.start()
 

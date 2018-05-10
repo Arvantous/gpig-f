@@ -4,8 +4,9 @@ from SimEng import Agent
 
 class GridNode(Agent):
 
-    def __init__(self, node_id, world, priority=0):
-        super().__init__(world, priority)
+    def __init__(self, node_id, world, sim_priority=0):
+        super().__init__(world, sim_priority)
+        self.node_priority = 0
         self.node_id = node_id
         self.parent_node = None
         self.children_nodes = []
@@ -26,12 +27,12 @@ class GridNode(Agent):
         self.power_level += self.power_production_rate
         self.power_level -= self.power_consumption_rate
         self.power_level = max(0, min(self.power_limit, self.power_level))
-        # Execute strategies 
+        # Execute strategies
 
 
 
 class GridNodeTemplateRegistry(object):
-    
+
     def __init__(self, template_filepath):
         self.templates = {}
         with open(template_filepath) as template_file:
@@ -42,7 +43,8 @@ class GridNodeTemplateRegistry(object):
     def make_node(self, node_type, node_id, world):
         if node_type in self.templates:
             template = self.templates[node_type]
-            node = GridNode(node_id, world, template["priority"])
+            node = GridNode(node_id, world)
+            node.node_priority = template["priority"]
             node.power_level = template["powerLevel"]
             node.power_limit = template["powerLimit"]
             node.power_production_rate = template["powerProductionRate"]
@@ -52,4 +54,3 @@ class GridNodeTemplateRegistry(object):
             return node
         else:
             raise RuntimeError("Could not find a node with type '{}'".format(node_type))
-    

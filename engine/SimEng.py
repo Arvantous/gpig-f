@@ -22,7 +22,7 @@ class World(object):
     def add_agent(self,agent):
         """Add agent to list of agents, sort on update priority, higher is more important"""
         self.agents.append(agent)
-        self.agents = sorted(self.agents, key = lambda x: x.priority, reverse=True)
+        self.agents = sorted(self.agents, key = lambda x: x.sim_priority, reverse=True)
 
     def step_all(self):
         """step and update all agents in simulation"""
@@ -45,9 +45,9 @@ class Agent(object):
     """
     Smallest steppable object
     """
-    def __init__(self, world, priority = 0):
+    def __init__(self, world, sim_priority = 0):
         self.world = world
-        self.priority = priority
+        self.sim_priority = sim_priority
         world.add_agent(self)
 
 

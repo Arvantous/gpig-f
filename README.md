@@ -125,7 +125,7 @@ if __name__ == "__main__":
     app.run(debug=True)
 ```
 Accessing the web server by the given URL, in our case 'http://127.0.0.1:5000/' and returns the json data.
-![Image of json Return](https://github.com/vd548/gpig-f/pictures/jsonReturn.png)
+![Image of json Return](https://github.com/vd548/gpig-f/blob/master/pictures/jsonReturn.png)
 
 ## Full Code
 ```python

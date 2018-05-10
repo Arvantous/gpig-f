@@ -1,0 +1,49 @@
+{
+    "nodes": [
+        {
+            "id": "house-a",
+            "type": "House",
+            "parentNode": "cluster-a"
+        },
+        {
+            "id": "house-b",
+            "type": "House",
+            "parentNode": "cluster-a"
+        },
+        {
+            "id": "house-c",
+            "type": "House",
+            "parentNode": "cluster-a"
+        },
+        {
+            "id": "house-d",
+            "type": "House",
+            "parentNode": "cluster-b"
+        },
+        {
+            "id": "shop-a",
+            "type": "Shop",
+            "parentNode": "cluster-b"
+        },
+        {
+            "id": "hospital-a",
+            "type": "Hospital",
+            "parentNode": "cluster-b"
+        },
+        {
+            "id": "cluster-a",
+            "type": "Cluster",
+            "parentNode": "cluster-c"
+        },
+        {
+            "id": "cluster-b",
+            "type": "Cluster",
+            "parentNode": "cluster-c"
+        },
+        {
+            "id": "cluster-c",
+            "type": "ProducingCluster",
+            "parentNode": null
+        }
+    ]
+}

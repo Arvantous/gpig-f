@@ -1,0 +1,55 @@
+{
+    "templates": 
+    [
+        {
+            "type": "House",
+            "priority": 0,
+            "powerLevel": 50,
+            "powerLimit": 100,
+            "powerProductionRate": 15,
+            "powerConsumptionRate": 10,
+            "behaviouralStrategies": ["DefaultBehaviouralStrategy"],
+            "evaluationStrategy": "DefaultEvaluationStrategy"
+        },
+        {
+            "type": "Shop",
+            "priority": 0,
+            "powerLevel": 50,
+            "powerLimit": 100,
+            "powerProductionRate": 15,
+            "powerConsumptionRate": 10,
+            "behaviouralStrategies": ["DefaultBehaviouralStrategy"],
+            "evaluationStrategy": "DefaultEvaluationStrategy"
+        },
+        {
+            "type": "Hospital",
+            "priority": 5,
+            "powerLevel": 200,
+            "powerLimit": 400,
+            "powerProductionRate": 20,
+            "powerConsumptionRate": 30,
+            "behaviouralStrategies": ["DefaultBehaviouralStrategy"],
+            "evaluationStrategy": "DefaultEvaluationStrategy"
+        },
+        {
+            "type": "Cluster",
+            "priority": 0,
+            "powerLevel": 0,
+            "powerLimit": 0,
+            "powerProductionRate": 0,
+            "powerConsumptionRate": 0,
+            "behaviouralStrategies": ["PrioritisedDistributionStrategy"],
+            "evaluationStrategy": "PrioritisedEvaluationStrategy"
+        },
+        {
+            "type": "ProducingCluster",
+            "priority": 0,
+            "powerLevel": 500,
+            "powerLimit": 1000,
+            "powerProductionRate": 50,
+            "powerConsumptionRate": 0,
+            "behaviouralStrategies": ["PrioritisedDistributionStrategy"],
+            "evaluationStrategy": "PrioritisedEvaluationStrategy"
+        }
+    ]
+}

@@ -1,3 +1,6 @@
+import copy
+import json
+
 class World(object):
     """
     Scene Object, container for agents for steppables
@@ -7,6 +10,14 @@ class World(object):
         self.agents = []
         self.run = True
         self.steps = 0
+
+    def to_dict(self):
+        world_data = copy.deepcopy(vars(self))
+        world_data["agents"] = [agent.to_dict() for agent in self.agents]
+        return world_data
+
+    def to_json(self):
+        return json.dumps(self.to_dict(), default=lambda obj: str(obj))
 
     def add_agent(self,agent):
         """Add agent to list of agents, sort on update priority, higher is more important"""

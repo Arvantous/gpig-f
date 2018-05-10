@@ -1,7 +1,9 @@
 # GPIG - Simulation
 This is a repository containing containing the source code for the demonstration simulation and engine.
 
-Code is written in Python 3.
+Technologies:
+[Python 3](https://www.python.org/downloads/)
+[Flask](http://flask.pocoo.org/)
 
 # Create a basic simulation, Hello World
 Import the World and Agent object. The World class is a container for the simulation. It controls the update order for the objects and provides a parent for the object to communicate through. it provides methods for updating each agent.
@@ -27,7 +29,7 @@ The init method adds the HelloWorld Agent to the simulation world and sets the n
 
 ```python
 my_world = World()
-helloAgent = Agent(my_world)
+hello_agent = Agent(my_world)
 ```
 We pass the agent the world object so it can make reference to other entities and make itself a member of this simulation world. We can now run the simulation for 10 steps and see the corresponding output.
 ```python
@@ -46,6 +48,69 @@ Hello world, steps: 8
 Hello world, steps: 9
 Hello world, steps: 10
 ```
+## Full Code
+```python
+from SimEng import World, Agent
+
+class Hello_world(Agent):
+    """Test Agent"""
+    def __init__(self, world):
+        super().__init__(world)
+        self.steps = 0
+
+    def step(self):
+        self.steps += 1
+        print("Hello world, steps:", self.steps)
+
+if __name__ == "__main__":
+    my_world = World()
+    hello_agent = Hello_world(my_world)
+    my_world.run_for_n(10)
+```
+# Extending our Simulation to enable a web interface
+
+## Full Code
+```python
+import threading
+import time
+from flask import Flask, jsonify
+from SimEng import World, Agent
+
+# Global world object
+my_world = None
+
+class Hello_world(Agent):
+    """Test Agent"""
+    def __init__(self, world):
+        super().__init__(world)
+        self.steps = 0
+
+    def step(self):
+        self.steps += 1
+        print("Hello world, steps:", self.steps)
+
+app = Flask(__name__)
+
+@app.before_first_request
+def create_world():
+    def run_simulation():
+        # Tick simulation every 1 second
+        while(True):
+            my_world.step_all()
+            time.sleep(1)
+    global my_world
+    my_world = World()
+    hello_agent = Hello_world(my_world)
+    thread = threading.Thread(target=run_simulation)
+    thread.start()
 
 
+@app.route('/')
+def hello_world():
+    # Return the step value of the first agent
+    step_val = my_world.agents[0].steps
+    return jsonify({"some_text":"Hello!","steps":step_val})
+
+```
+Open your web browser and go to the appropriate url, likely "http://127.0.0.1:5000/" to receive the json request.
 

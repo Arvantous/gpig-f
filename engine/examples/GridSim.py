@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
+
 from SimEng import World, Agent
 
 

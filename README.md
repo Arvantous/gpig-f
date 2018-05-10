@@ -2,7 +2,9 @@
 This is a repository containing containing the source code for the demonstration simulation and engine.
 
 Technologies:
+
 [Python 3](https://www.python.org/downloads/)
+
 [Flask](http://flask.pocoo.org/)
 
 # Create a basic simulation, Hello World
@@ -69,10 +71,68 @@ if __name__ == "__main__":
 ```
 # Extending our Simulation to enable a web interface
 
-## Full Code
+The simulation will be run on a separate thread, and will contact the outside world through the a web interface run on Flask. We import the relevant modules.
+
 ```python
 import threading
 import time
+from flask import Flask, jsonify
+from SimEng import World, Agent
+```
+As in the previous example, we define a Hello World agent which will just increment it's own step counter. A function is added "toJson" which returns a json object containing the objects properties we are interested in for transmitting. We also create the app variable which flask uses to tell which app it will be running on the web server, in this case it is the this file itself. We set my_world as a global variable so that the generated responses can access the running simulation attributes.
+```python
+my_world = None
+app = Flask(__name__)
+class Hello_world(Agent):
+    """Test Agent"""
+    def __init__(self, world):
+        super().__init__(world)
+        self.steps = 0
+
+    def step(self):
+        self.steps += 1
+        print("Hello world, steps:", self.steps)
+        
+    def toJson(self):
+		return jsonify({"steps": self.steps})
+```
+A method is created to start up the simulation before the first web request. The world is instantiated and an agent is created to execute within that world. Using threads the simulation is run in the background with a time step executing every 1 second.
+```python
+@app.before_first_request
+def create_world():
+    def run_simulation():
+        # Tick simulation every 1 second
+        while(True):
+            my_world.step_all()
+            time.sleep(1)
+    global my_world
+    my_world = World()
+    hello_agent = Hello_world(my_world)
+    thread = threading.Thread(target=run_simulation)
+    thread.start()
+
+```
+A web entry point needs to be created, this is the URL that will be used to handle the GET request for information about the currently running simulation. Flask uses the 'app.route' decorator to define the access URL, in this case the index page. This function returns the json data of the first agent in the world list.
+```python
+@app.route('/')
+def hello_world():
+    # Return the step value of the first
+    return my_world.agents[0].toJson()
+```
+We create a quick method to run the web server in debug mode so we can see what's going on.
+```python
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+Accessing the web server by the given URL, in our case 'http://127.0.0.1:5000/' and returns the json data.
+![Image of json Return](https://github.com/vd548/gpig-f/pictures/jsonReturn.png)
+
+## Full Code
+```python
+import sys
+import threading
+import time
+sys.path.append("..") # Adds higher directory to python modules path.
 from flask import Flask, jsonify
 from SimEng import World, Agent
 
@@ -89,6 +149,10 @@ class Hello_world(Agent):
         self.steps += 1
         print("Hello world, steps:", self.steps)
 
+    def toJson(self):
+        return jsonify({"steps": self.steps})
+
+
 app = Flask(__name__)
 
 @app.before_first_request
@@ -101,15 +165,18 @@ def create_world():
     global my_world
     my_world = World()
     hello_agent = Hello_world(my_world)
+
     thread = threading.Thread(target=run_simulation)
     thread.start()
 
 
 @app.route('/')
 def hello_world():
-    # Return the step value of the first agent
-    step_val = my_world.agents[0].steps
-    return jsonify({"some_text":"Hello!","steps":step_val})
+    # Return the step value of the first
+    return my_world.agents[0].toJson()
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 ```
 Open your web browser and go to the appropriate url, likely "http://127.0.0.1:5000/" to receive the json request.

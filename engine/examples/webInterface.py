@@ -18,6 +18,8 @@ class Hello_world(Agent):
         self.steps += 1
         print("Hello world, steps:", self.steps)
 
+    def toJson(self):
+        return jsonify({"steps": self.steps})
 
 
 app = Flask(__name__)
@@ -40,5 +42,7 @@ def create_world():
 @app.route('/')
 def hello_world():
     # Return the step value of the first
-    step_val = my_world.agents[0].steps
-    return jsonify({"some_text":"Hello!","steps":step_val})
+    return my_world.agents[0].toJson()
+
+if __name__ == "__main__":
+    app.run(debug=True)

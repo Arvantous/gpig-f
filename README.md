@@ -8,6 +8,11 @@ Requirements:
 
 [Flask](http://flask.pocoo.org/)
 
+Flask can be installed on University computers using the following command:
+```
+$ python3 -m pip install --user flask
+```
+
 ## Running the simulation
 
 

@@ -1,7 +1,7 @@
 import sys
 import threading
 import time
-sys.path.append("..") # Adds higher directory to python modules path.
+sys.path.append("../..") # Adds higher directory to python modules path.
 from flask import Flask, jsonify, render_template
 from SimEng import World, Agent
 

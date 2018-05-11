@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<script type=text/javascript>
+  		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+		</script>
+		<script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}"></script>
+	</head>
+	<body>
+		<script>
+			var api = $SCRIPT_ROOT + "/api";
+			function getSimStatus(){
+				$.getJSON(api)
+			.done(function(data){
+				$("#steps").text(data.steps);
+			});
+			}
+			setInterval(getSimStatus, 1000);
+		</script>
+		<h id=steps>?</h>
+	</body>
+</html>

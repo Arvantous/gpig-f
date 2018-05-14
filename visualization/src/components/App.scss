@@ -1,0 +1,15 @@
+.App {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  &__GraphView {
+    flex: 5;
+    height: 100%;
+  }
+
+  &__NodeView {
+    flex: 2;
+    height: 100%;
+  }
+}

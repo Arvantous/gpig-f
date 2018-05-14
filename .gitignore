@@ -1,3 +1,8 @@
 # ignore python object files
 *.pyc
 .*
+
+# node build artifacts
+!.babelrc
+node_modules/
+dist/

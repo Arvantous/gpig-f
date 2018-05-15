@@ -6,6 +6,23 @@ Requirements:
 
 [Python 3](https://www.python.org/downloads/)
 
+Installing Pip on University Computer
+
+Make a directory:
+```
+mkdir pip-install
+cd pip-install
+```
+
+Get pip installer
+```
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+```
+Install pip
+```
+python3 get-pip.py
+```
+
 [Flask](http://flask.pocoo.org/)
 
 Flask can be installed on University computers using the following command:

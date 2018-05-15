@@ -4,7 +4,7 @@ import time
 from flask import Flask, jsonify
 from SimEng import World, Agent
 import json
-from GridCreator import GridCreator
+from Grid import Grid
 
 # Global world object
 
@@ -20,7 +20,7 @@ def create_world():
             grid.step_all()
             time.sleep(1)
     global grid
-    grid = GridCreator.make_grid("./config/config.json", "./config/templates.json")
+    grid = Grid("./config/config.json", "./config/templates.json")
     thread = threading.Thread(target=run_simulation)
     thread.start()
 

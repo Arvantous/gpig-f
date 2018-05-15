@@ -1,3 +1,5 @@
+/* global fetch */
+
 import React from 'react'
 
 import './App.scss'
@@ -19,7 +21,7 @@ class App extends React.Component {
       selectedAgentId: undefined,
       isPlaying: false
     }
-    this.tick();
+    this.tick()
   }
 
   componentDidMount () {

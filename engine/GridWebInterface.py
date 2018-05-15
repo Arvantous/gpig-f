@@ -28,7 +28,9 @@ def create_world():
 @app.route('/')
 def grid_interface():
     # Return the step value of the first
-    return jsonify(json.loads(grid.to_json()))
+    resp = jsonify(json.loads(grid.to_json()))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 if __name__ == "__main__":
     app.run(debug=True)

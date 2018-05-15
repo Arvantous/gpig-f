@@ -4,6 +4,8 @@ import './App.scss'
 import GraphView from './GraphView'
 import NodeView from './NodeView'
 
+const ENGINE_URL = 'http://localhost:5000'
+
 /**
  * Basically the entry-point for the app.
  */
@@ -12,7 +14,8 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      world: undefined
+      world: undefined,
+      selectedAgentId: undefined
     }
   }
 
@@ -25,14 +28,29 @@ class App extends React.Component {
   }
 
   tick () {
-    console.log('tick')
+    fetch(ENGINE_URL)
+      .then(res => res.json())
+      .then((world) => {
+        this.setState({...this.state, world})
+      })
+  }
+
+  onSelectedAgent (newAgentId) {
+    this.setState({...this.state, selectedAgentId: newAgentId})
   }
 
   render () {
     return (
       <div className='App'>
-        <div className='App__GraphView'><GraphView /></div>
-        <div className='App__NodeView'><NodeView /></div>
+        <div className='App__GraphView'>
+          <GraphView
+            {...this.state}
+            onSelectedAgent={newAgent => this.onSelectedAgent(newAgent)}
+          />
+        </div>
+        <div className='App__NodeView'>
+          <NodeView {...this.state} />
+        </div>
       </div>
     )
   }

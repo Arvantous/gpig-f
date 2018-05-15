@@ -6,10 +6,10 @@ import Container from './visual/Container'
 /**
  * The details panel for a selected node.
  */
-const NodeView = () => (
+const NodeView = ({world, selectedAgentId}) => (
   <div className='NodeView'>
     <Container>
-      node view
+      Currently selected: {selectedAgentId || 'nothing'}
     </Container>
   </div>
 )

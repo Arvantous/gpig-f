@@ -1,7 +1,7 @@
 import sys
 import threading
 import time
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from SimEng import World, Agent
 import json
 from Grid import Grid
@@ -14,20 +14,13 @@ grid = None
 
 @app.before_first_request
 def create_world():
-    def run_simulation():
-        # Tick simulation every 1 second
-        while(True):
-            grid.step_all()
-            time.sleep(1)
     global grid
     grid = Grid("./config/config.json", "./config/templates.json")
-    thread = threading.Thread(target=run_simulation)
-    thread.start()
 
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def grid_interface():
-    # Return the step value of the first
+    if request.method == 'POST':
+        grid.step_all()
     resp = jsonify(json.loads(grid.to_json()))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp

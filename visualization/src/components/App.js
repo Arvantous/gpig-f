@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './App.scss'
+import Stepper from './Stepper'
 import GraphView from './GraphView'
 import NodeView from './NodeView'
 
@@ -15,12 +16,15 @@ class App extends React.Component {
 
     this.state = {
       world: undefined,
-      selectedAgentId: undefined
+      selectedAgentId: undefined,
+      isPlaying: false
     }
   }
 
   componentDidMount () {
-    this.timerID = setInterval(() => this.tick(), 1000)
+    this.timerID = setInterval(() => {
+      if (this.state.isPlaying) this.tick()
+    }, 1000)
   }
 
   componentWillUnmount () {
@@ -28,7 +32,7 @@ class App extends React.Component {
   }
 
   tick () {
-    fetch(ENGINE_URL)
+    fetch(ENGINE_URL, { method: 'POST' })
       .then(res => res.json())
       .then((world) => {
         this.setState({...this.state, world})
@@ -42,6 +46,14 @@ class App extends React.Component {
   render () {
     return (
       <div className='App'>
+        <div className='App__Stepper'>
+          <Stepper
+            isPlaying={this.state.isPlaying}
+            onStep={() => this.tick()}
+            onPlay={() => this.setState({ isPlaying: true })}
+            onPause={() => this.setState({ isPlaying: false })}
+          />
+        </div>
         <div className='App__GraphView'>
           <GraphView
             {...this.state}

@@ -1,15 +1,27 @@
 .App {
+  position: relative;
   display: flex;
   flex-direction: row;
   height: 100%;
 
+  &__Stepper {
+    position: absolute;
+    right: 30%;
+    top: 15px;
+    width: 200px;
+    height: 50px;
+    margin-right: 15px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
   &__GraphView {
-    flex: 5;
+    flex: 70;
     height: 100%;
   }
 
   &__NodeView {
-    flex: 2;
+    flex: 30;
     height: 100%;
   }
 }

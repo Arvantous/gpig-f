@@ -32,6 +32,9 @@ class GridNode(Agent):
         node_data = copy.deepcopy(vars(self))
         node_data["parent_node"] = None if self.parent_node is None else self.parent_node.node_id
         node_data["children_nodes"] = [child_node.node_id for child_node in self.children_nodes]
+        node_data["share_queue"] = [(source.node_id, amount) for source, amount in self.share_queue]
+        node_data["request_queue"] = [(source.node_id, amount) for source, amount in self.request_queue]
+        node_data["transfer_queue"] = [(source.node_id, target.node_id, amount) for source, target, amount in self.transfer_queue]
         return node_data
 
     def step(self):

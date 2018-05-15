@@ -14,9 +14,10 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      world: undefined,
+      world: {agents: []},
       selectedAgentId: undefined
     }
+    this.tick();
   }
 
   componentDidMount () {

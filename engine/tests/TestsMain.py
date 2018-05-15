@@ -14,9 +14,9 @@ class TestSimBehaviour(unittest.TestCase):
         Tests that the two house agents live on their own power consumption
         and do not transfer between agents.
         """
-        grid = Grid("./config/no_change_config.json", "./config/templates.json")
-        agent_a = get_agent("house-a")
-        agent_b = get_agent("house-b")
+        grid = Grid("./testConfigs/no_change_config.json", "./testConfigs/templates.json")
+        agent_a = get_agent(grid, "house-a")
+        agent_b = get_agent(grid, "house-b")
         a_last_power = agent_a.power_level
         b_last_power = agent_b.power_level
         grid.step_all()

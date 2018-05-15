@@ -1,0 +1,19 @@
+{
+    "nodes": [
+        {
+            "id": "house-a",
+            "type": "House",
+            "parentNode": "cluster-a"
+        },
+        {
+            "id": "house-b",
+            "type": "House",
+            "parentNode": "cluster-a"
+        },
+        {
+            "id": "cluster-a",
+            "type": "Cluster",
+            "parentNode": null
+        }
+    ]
+}

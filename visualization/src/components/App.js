@@ -47,14 +47,6 @@ class App extends React.Component {
   render () {
     return (
       <div className='App'>
-        <div className='App__Stepper'>
-          <Stepper
-            isPlaying={this.state.isPlaying}
-            onStep={() => this.tick()}
-            onPlay={() => this.setState({ isPlaying: true })}
-            onPause={() => this.setState({ isPlaying: false })}
-          />
-        </div>
         <div className='App__GraphView'>
           <GraphView
             {...this.state}
@@ -63,6 +55,14 @@ class App extends React.Component {
         </div>
         <div className='App__NodeView'>
           <NodeView {...this.state} />
+        </div>
+        <div className='App__Stepper'>
+          <Stepper
+            isPlaying={this.state.isPlaying}
+            onStep={() => this.tick()}
+            onPlay={() => this.setState({ isPlaying: true })}
+            onPause={() => this.setState({ isPlaying: false })}
+          />
         </div>
       </div>
     )

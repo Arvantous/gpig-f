@@ -69,12 +69,15 @@ function generateGraph (currEdges, currNodes, world) {
     }
 
   }
-
+  function compEdges(val, oth){
+     return (val.to === oth.to && val.from === oth.from && val.label === oth.label)
+  }
   // dynamically add and removes edges/nodes
   currNodes.remove(_.differenceBy(currNodes.get(), nodes, 'id'))
   currNodes.add(_.differenceBy(nodes, currNodes.get(), 'id'))
-  currEdges.remove(_.differenceWith(currEdges.get(), edges, (val,oth) => val.from === oth.from && val.to == oth.to))
-  currEdges.add(_.differenceWith(edges, currEdges.get(),  (val,oth) => val.from === oth.from && val.to == oth.to))
+  currEdges.remove(_.differenceWith(currEdges.get(), edges, compEdges))
+  currEdges.add(_.differenceWith(edges, currEdges.get(), compEdges))
+  //console.log(currEdges);
 }
 
 /**

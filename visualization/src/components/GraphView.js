@@ -44,7 +44,21 @@ class GraphView extends React.Component {
   componentDidMount () {
     this.network = new vis.Network(this.el, {}, graphOptions)
     this.network.on('select', ({ nodes }) => {
-      this.props.onSelectedAgent(nodes[0])
+      var node = nodes[0];
+      this.props.onSelectedAgent(node)
+      //Animate selection
+      var options = {
+        position: {x:300,y:300},
+        scale: 1.0,
+        offset: {x:0,y:0},
+        animation: true // default duration is 1000ms and default easingFunction is easeInOutQuad.
+      };
+      if(node !== undefined){
+          this.network.focus(node,options);
+      }
+      else{
+          this.network.fit(options);
+      }
     })
     this.network.setData({edges: this.edges, nodes: this.nodes})
 

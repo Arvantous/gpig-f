@@ -7,7 +7,8 @@
             "powerLevel": 50,
             "powerLimit": 100,
             "powerProductionRate": 15,
-            "powerConsumptionRate": 10
+            "powerConsumptionRate": 10,
+            "archetype":"house"
         },
         {
             "type": "Shop",
@@ -15,7 +16,8 @@
             "powerLevel": 50,
             "powerLimit": 100,
             "powerProductionRate": 15,
-            "powerConsumptionRate": 10
+            "powerConsumptionRate": 10,
+            "archetype":"business"
         },
         {
             "type": "Hospital",
@@ -23,7 +25,8 @@
             "powerLevel": 200,
             "powerLimit": 400,
             "powerProductionRate": 20,
-            "powerConsumptionRate": 30
+            "powerConsumptionRate": 30,
+            "archetype":"infrastructure"
         },
         {
             "type": "Cluster",
@@ -31,7 +34,8 @@
             "powerLevel": 0,
             "powerLimit": 0,
             "powerProductionRate": 0,
-            "powerConsumptionRate": 0
+            "powerConsumptionRate": 0,
+            "archetype":"cluster"
         },
         {
             "type": "ProducingCluster",
@@ -39,7 +43,8 @@
             "powerLevel": 500,
             "powerLimit": 1000,
             "powerProductionRate": 50,
-            "powerConsumptionRate": 0
+            "powerConsumptionRate": 0,
+            "archetype":"cluster"
         }
     ]
 }

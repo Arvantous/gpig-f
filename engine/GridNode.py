@@ -27,6 +27,7 @@ class GridNode(Agent):
         self.share_queue = []
         self.request_queue = []
         self.transfer_queue = []
+        self.archetype = None
 
     def to_dict(self):
         node_data = copy.deepcopy(vars(self))

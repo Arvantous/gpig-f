@@ -19,6 +19,7 @@ class GridNodeTemplateRegistry(object):
             node.power_limit = template["powerLimit"]
             node.power_production_rate = template["powerProductionRate"]
             node.power_consumption_rate = template["powerConsumptionRate"]
+            node.archetype = template["archetype"]
             return node
         else:
             raise RuntimeError("Could not find a node with type '{}'".format(node_type))

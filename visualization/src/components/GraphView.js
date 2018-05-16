@@ -26,8 +26,8 @@ function generateGraph (currEdges, currNodes, world) {
   // dynamically add and removes edges/nodes
   currNodes.remove(_.differenceBy(currNodes.get(), nodes, 'id'))
   currNodes.add(_.differenceBy(nodes, currNodes.get(), 'id'))
-  currEdges.remove(_.differenceWith(currEdges.get(), edges, _.isEqual))
-  currEdges.add(_.differenceWith(edges, currEdges.get(), _.isEqual))
+  currEdges.remove(_.differenceWith(currEdges.get(), edges, (val,oth) => val.from === oth.from && val.to == oth.to))
+  currEdges.add(_.differenceWith(edges, currEdges.get(),  (val,oth) => val.from === oth.from && val.to == oth.to))
 }
 
 /**

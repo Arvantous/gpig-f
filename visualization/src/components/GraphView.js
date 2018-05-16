@@ -1,7 +1,6 @@
 import React from 'react'
 import vis from 'vis'
 import _ from 'lodash'
-
 import './GraphView.scss'
 
 const graphOptions = {
@@ -9,18 +8,66 @@ const graphOptions = {
     hierarchical: false
   },
   edges: {
-    color: '#000000'
-  }
+    color: {color:'#000000'}
+},
+  groups: {
+            house: {
+                shape: 'icon',
+                icon: {
+                    code: '🏡',
+                    size: 50,
+                    color: 'orange'
+                }
+            },
+            infrastructure: {
+                shape: 'icon',
+                icon: {
+                    code: '🏢',
+                    size: 50,
+                    color: 'cyan'
+                }
+            },
+            cluster: {
+                shape: 'icon',
+                icon:{
+                    code:'☁',
+                    size: 50,
+                    color: 'white',
+                }
+            },
+            business: {
+                shape: 'icon',
+                icon: {
+                    code: '🏪',
+                    size: 50,
+                    color: 'orange'
+                }
+            }
+        }
+
 }
 
 function generateGraph (currEdges, currNodes, world) {
   var nodes = []
   var edges = []
   for (var agent of world.agents) {
-    nodes.push({id: agent.node_id, label: agent.node_id})
+    nodes.push({id: agent.node_id, label: agent.node_id, group: agent.archetype})
     if (agent.parent_node !== null) {
       edges.push({from: agent.node_id, to: agent.parent_node})
     }
+    // add transfer edges
+    for(var transfer of agent.transfer_queue){
+      if(transfer[2] !== 0){
+          edges.push({
+              from: transfer[0],
+              to: transfer[1],
+              label: transfer[2].toString(),
+              color: {color:'#1F75FE'},
+              arrows:'to',
+              dashes:true});
+      }
+    }
+
   }
 
   // dynamically add and removes edges/nodes
@@ -49,7 +96,7 @@ class GraphView extends React.Component {
       //Animate selection
       var options = {
         position: {x:300,y:300},
-        scale: 1.0,
+        scale: 1.5,
         offset: {x:0,y:0},
         animation: true // default duration is 1000ms and default easingFunction is easeInOutQuad.
       };
